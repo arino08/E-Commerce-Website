@@ -1,0 +1,19 @@
+<div class="header"></div>
+    <button class="btn btn-secondary" onclick="logout()">Logout</button>
+</div>
+
+<script>
+    function logout() {
+        fetch('/logout', {
+            method: 'POST'
+        })
+        .then(response => response.text())
+        .then(data => {
+            alert(data);
+            window.location.href = '/login';
+        })
+        .catch(error => {
+            console.error('Error logging out:', error);
+        });
+    }
+</script>
