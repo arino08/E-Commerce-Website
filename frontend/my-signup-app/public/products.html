@@ -5,6 +5,9 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
     <title>Products - Nova</title>
+    <style>img{
+        /* mix-blend-mode: multiply; */
+    }</style>
     <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdn.reflowhq.com/v2/toolkit.min.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inter:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800&amp;display=swap">
@@ -53,7 +56,22 @@
             </div>
         </div>
         <div class="container">
-        <div id="products" class="row"></div>
+        <div id="products" class="row">
+            <style>
+                .fade-in {
+                    opacity: 0;
+                    transition: opacity 1s ease-in-out;
+                }
+            
+                .fade-in.visible {
+                    opacity: 1;
+                }
+            
+                .product-card {
+                    margin-bottom: 80px; /* Adjust the value to increase/decrease the space */
+                }
+            </style>
+        </div>
     </div>
 
     <script>
@@ -62,9 +80,9 @@
                 .then(response => response.json())
                 .then(products => {
                     const productsContainer = document.getElementById('products');
-                    products.forEach(product => {
+                    products.forEach((product, index) => {
                         const productCard = document.createElement('div');
-                        productCard.className = 'col-md-4';
+                        productCard.className = 'col-md-4 fade-in';
                         productCard.innerHTML = `
                             <div class="card">
                                 <img src="${product.image_url}" class="card-img-top" alt="${product.name}">
@@ -78,12 +96,34 @@
                         `;
                         productsContainer.appendChild(productCard);
                     });
+    
+                    // Set up the Intersection Observer
+                    const observer = new IntersectionObserver((entries, observer) => {
+                        entries.forEach(entry => {
+                            if (entry.isIntersecting) {
+                                entry.target.classList.add('visible');
+                                observer.unobserve(entry.target);
+                            }
+                        });
+                    }, { threshold: 0.1 });
+    
+                    // Observe each product card
+                    document.querySelectorAll('.fade-in').forEach(card => {
+                        observer.observe(card);
+                    });
                 })
                 .catch(error => {
                     console.error('Error fetching products:', error);
                 });
+    
+            // Load the header
+            fetch('header.html')
+                .then(response => response.text())
+                .then(data => {
+                    document.getElementById('header').innerHTML = data;
+                });
         });
-
+    
         function addToCart(productId) {
             const quantity = 1; // Default quantity
             fetch('/cart', {
@@ -159,8 +199,6 @@
     <script src="https://cdn.reflowhq.com/v2/toolkit.min.js"></script>
     <script src="assets/js/bs-init.js"></script>
     <script src="assets/js/bold-and-dark.js"></script>
-
-    
 
 </body>
 
