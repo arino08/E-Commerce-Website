@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html data-bs-theme="light" lang="en">
+<html data-bs-theme="dark" lang="en">
 
 <head>
     <meta charset="utf-8">
@@ -38,9 +38,7 @@
                     <li class="nav-item"></li>
                     <li class="nav-item"></li>
                 </ul><a class="btn btn-primary shadow" role="button" href="signup.html">Sign up</a>
-            </div>
         </div>
-        <div id="logout"></div>
     </nav>
     <section class="py-5">
         <div class="container py-5">
@@ -130,11 +128,11 @@
                         productCard.className = 'col-md-3 fade-in';
                         productCard.innerHTML = `
                             <div class="card">
-                                <img src="${product.image_url}" class="card-img-top" alt="${product.name}" height="300px">
+                                <img src="${product.image_url}" class="card-img-top rounded" alt="${product.name}" height="300px">
                                 <div class="card-body">
                                     <h5 class="card-title">${product.name}</h5>
                                     <p class="card-text">${product.description}</p>
-                                    <p class="card-price">$${product.price}</p>
+                                    <p class="card-price">₹${product.price}</p>
                                     <button class="add-to-cart-btn" onclick="addToCart(${product.id})">Add to Cart</button>
                                 </div>
                             </div>

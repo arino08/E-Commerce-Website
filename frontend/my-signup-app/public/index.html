@@ -23,43 +23,101 @@
                 <ul class="navbar-nav mx-auto">
                     <li class="nav-item"><a class="nav-link active" href="index.html">Home</a></li>
                     <li class="nav-item"></li>
-                    <!-- <li class="nav-item"><a class="nav-link" href="services.html">Services</a></li> -->
-                    <!-- <li class="nav-item"><a class="nav-link" href="projects.html">Projects</a></li> -->
-                    <!-- <li class="nav-item"><a class="nav-link" href="pricing.html">Pricing</a></li> -->
                     <li class="nav-item"><a class="nav-link" href="products.html">Products</a></li>
                     <li class="nav-item"><a class="nav-link" href="shopping-cart.html">Shopping Cart</a></li>
                     <li class="nav-item"><a class="nav-link" href="team.html">Team</a></li>
-                    <li class="nav-item" data-bss-hover-animate="wobble"></li>
-                    <!-- <li class="nav-item"><a class="nav-link" href="contacts.html">Contacts</a></li> -->
-                    <li class="nav-item"></li>
-                    <li class="nav-item"></li>
                 </ul><a class="btn btn-primary shadow" role="button" href="signup.html">Sign up</a>
             </div>
         </div>
-        <div id="logout"></div>
     </nav>
     <header class="bg-dark">
         <div class="container pt-4 pt-xl-5">
             <div class="row pt-5">
-                <div class="col-md-8 col-xl-6 text-center text-md-start mx-auto">
-                    <div class="text-center">
-                        <!-- <p class="fw-bold text-success mb-2">Voted #1 Worldwide</p> -->
-                        <h1 class="fw-bold">The best solution for you and your customers</h1>
+                <div class="col-md-8 col-xl-6 text-center text-md-start mx-auto"></div>
+                <div class="text-center">
+                    <h2 class="fw-bold">The best solution for you and your customers</h2>
+                </div>
+            </div>
+            <div class="col-12"></div>
+            <div id="productCarousel" class="carousel slide" data-bs-ride="carousel" style="max-width: 100%;">
+                <div class="carousel-inner">
+                    <div class="carousel-item active">
+                        <img src="https://images.pexels.com/photos/2047905/pexels-photo-2047905.jpeg?auto=compress&cs=tinysrgb&w=1920&h=1080&dpr=1" class="d-block w-100" alt="Product 1" style="object-fit: cover; width: 100vw; height: 100vh;">
+                        <div class="carousel-caption d-none d-md-block" style="background-color: rgba(0, 0, 0, 0.5); color: white;">
+                            <h5>Product 1</h5>
+                            <p>Description for product 1.</p>
+                            <p>Price: $100</p>
+                        </div>
+                    </div>
+                    <div class="carousel-item">
+                        <img src="https://images.pexels.com/photos/3804415/pexels-photo-3804415.jpeg?auto=compress&cs=tinysrgb&w=1920&h=1080&dpr=1" class="d-block w-100" alt="Product 2" style="object-fit: cover; width: 100vw; height: 100vh;">
+                        <div class="carousel-caption d-none d-md-block" style="background-color: rgba(0, 0, 0, 0.5); color: white;">
+                            <h5>Product 2</h5>
+                            <p>Description for product 2.</p>
+                            <p>Price: $150</p>
+                        </div>
+                    </div>
+                    <div class="carousel-item">
+                        <img src="https://images.pexels.com/photos/788946/pexels-photo-788946.jpeg?auto=compress&cs=tinysrgb&w=1920&h=1080&dpr=1" class="d-block w-100" alt="Product 3" style="object-fit: cover; width: 100vw; height: 100vh;">
+                        <div class="carousel-caption d-none d-md-block" style="background-color: rgba(0, 0, 0, 0.5); color: white;">
+                            <h5>Product 3</h5>
+                            <p>Description for product 3.</p>
+                            <p>Price: $200</p>
+                        </div>
                     </div>
                 </div>
-                <div class="col-12 col-lg-10 mx-auto">
-                    <div class="position-relative" style="display: flex;flex-wrap: wrap;justify-content: flex-end;">
-                        <div style="position: relative;flex: 0 0 45%;transform: translate3d(-15%, 35%, 0);"><img class="img-fluid" data-bss-parallax="" data-bss-parallax-speed="0.8" src="https://images.pexels.com/photos/2047905/pexels-photo-2047905.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"></div>
-                        <div style="position: relative;flex: 0 0 45%;transform: translate3d(-5%, 20%, 0);"><img class="img-fluid" data-bss-parallax="" data-bss-parallax-speed="0.4" src="https://images.pexels.com/photos/3804415/pexels-photo-3804415.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"></div>
-                        <div style="position: relative;flex: 0 0 60%;transform: translate3d(0, 0%, 0);"><img class="img-fluid" data-bss-parallax="" data-bss-parallax-speed="0.25" src="https://images.pexels.com/photos/788946/pexels-photo-788946.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"></div>
-                    </div>
-                </div>
+                <button class="carousel-control-prev" type="button" data-bs-target="#productCarousel" data-bs-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Previous</span>
+                </button>
+                <button class="carousel-control-next" type="button" data-bs-target="#productCarousel" data-bs-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Next</span>
+                </button>
             </div>
         </div>
     </header>
+
+    <script>
+        const carousel = document.querySelector('#productCarousel .carousel-inner');
+        let isDown = false;
+        let startX;
+        let scrollLeft;
+
+        carousel.addEventListener('mousedown', (e) => {
+            isDown = true;
+            carousel.classList.add('active');
+            startX = e.pageX - carousel.offsetLeft;
+            scrollLeft = carousel.scrollLeft;
+        });
+
+        carousel.addEventListener('mouseleave', () => {
+            isDown = false;
+            carousel.classList.remove('active');
+        });
+
+        carousel.addEventListener('mouseup', () => {
+            isDown = false;
+            carousel.classList.remove('active');
+        });
+
+        carousel.addEventListener('mousemove', (e) => {
+            if (!isDown) return;
+            e.preventDefault();
+            const x = e.pageX - carousel.offsetLeft;
+            const walk = (x - startX) * 3; //scroll-fast
+            carousel.scrollLeft = scrollLeft - walk;
+        });
+    </script>
+    </header>
     <section class="py-5">
         <div class="container text-center py-5">
-            <p class="mb-4" style="font-size: 1.6rem;">Used by <span class="text-success"><strong>2400+</strong></span>&nbsp;of the best companies in the world.</p><a href="#"> <img class="m-3" src="assets/img/brands/google.png"></a><a href="#"> <img class="m-3" src="assets/img/brands/microsoft.png"></a><a href="#"> <img class="m-3" src="assets/img/brands/apple.png"></a><a href="#"> <img class="m-3" src="assets/img/brands/facebook.png"></a><a href="#"> <img class="m-3" src="assets/img/brands/twitter.png"></a>
+            <p class="mb-4" style="font-size: 1.6rem;">Used by <span class="text-success"><strong>2400+</strong></span>&nbsp;of the best companies in the world.</p>
+            <a href="#"><img class="m-3" src="assets/img/brands/google.png"></a>
+            <a href="#"><img class="m-3" src="assets/img/brands/microsoft.png"></a>
+            <a href="#"><img class="m-3" src="assets/img/brands/apple.png"></a>
+            <a href="#"><img class="m-3" src="assets/img/brands/facebook.png"></a>
+            <a href="#"><img class="m-3" src="assets/img/brands/twitter.png"></a>
         </div>
     </section>
     <section>
