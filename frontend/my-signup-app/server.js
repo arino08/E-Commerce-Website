@@ -118,15 +118,36 @@ app.post('/cart', (req, res) => {
     }
 
     const { product_id, quantity } = req.body;
-    const query = 'INSERT INTO cart (user_id, product_id, quantity) VALUES (?, ?, ?)';
+    const checkQuery = 'SELECT * FROM cart WHERE user_id = ? AND product_id = ?';
+    const insertQuery = 'INSERT INTO cart (user_id, product_id, quantity) VALUES (?, ?, ?)';
+    const updateQuery = 'UPDATE cart SET quantity = quantity + ? WHERE user_id = ? AND product_id = ?';
 
-    db.query(query, [req.session.user.id, product_id, quantity], (err, results) => {
+    db.query(checkQuery, [req.session.user.id, product_id], (err, results) => {
         if (err) {
             console.error('Error executing query:', err);
-            res.status(500).send('Error adding item to cart.');
+            res.status(500).send('Error checking cart.');
             return;
         }
-        res.status(200).send('Item added to cart successfully.');
+
+        if (results.length > 0) {
+            db.query(updateQuery, [quantity, req.session.user.id, product_id], (err, results) => {
+                if (err) {
+                    console.error('Error executing query:', err);
+                    res.status(500).send('Error updating item quantity in cart.');
+                    return;
+                }
+                res.status(200).send('Item quantity updated successfully.');
+            });
+        } else {
+            db.query(insertQuery, [req.session.user.id, product_id, quantity], (err, results) => {
+                if (err) {
+                    console.error('Error executing query:', err);
+                    res.status(500).send('Error adding item to cart.');
+                    return;
+                }
+                res.status(200).send('Item added to cart successfully.');
+            });
+        }
     });
 });
 

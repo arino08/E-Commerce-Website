@@ -16,3 +16,47 @@ document.addEventListener('DOMContentLoaded', () => {
         });
       });
   });
+  // function logout() {
+  //       fetch('/logout', {
+  //           method: 'POST'
+  //       })
+  //       .then(response => response.text())
+  //       .then(data => {
+  //           alert(data);
+  //           window.location.href = '/login';
+  //       })
+  //       .catch(error => {
+  //           console.error('Error logging out:', error);
+  //       });
+  //   }
+
+
+//   function logout() {
+//     fetch('/logout', {
+//         method: 'POST'
+//     })
+//     .then(response => response.text())
+//     .then(data => {
+//         alert(data);
+//         window.location.href = '/login';
+//     })
+//     .catch(error => {
+//         console.error('Error logging out:', error);
+//     });
+// }
+
+// // Check login status and update buttons
+// fetch('/status')
+//     .then(response => response.json())
+//     .then(data => {
+//         if (data.loggedIn) {
+//             document.getElementById('login-button').style.display = 'none';
+//             document.getElementById('logout-button').style.display = 'inline-block';
+//         } else {
+//             document.getElementById('login-button').style.display = 'inline-block';
+//             document.getElementById('logout-button').style.display = 'none';
+//         }
+//     })
+//     .catch(error => {
+//         console.error('Error checking login status:', error);
+//     });
